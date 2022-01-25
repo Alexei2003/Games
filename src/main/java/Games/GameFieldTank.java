@@ -14,7 +14,7 @@ public class GameFieldTank extends JPanel implements ActionListener {
     private final int ALL_DOTS = 400;
     private int[] x = new int[ALL_DOTS];
     private int[] y = new int[ALL_DOTS];
-    private int[] [] Projectail = new int[21][4];
+    private int[] [] Projectail = new int[21][5];
     private int x1;
     private int y1;
     private int x2;
@@ -23,14 +23,18 @@ public class GameFieldTank extends JPanel implements ActionListener {
     private boolean right = false;
     private boolean up = false;
     private boolean down = false;
-    private boolean inGame1 = true;
-    private boolean inGame2 = true;
+    private boolean leftF = false;
+    private boolean rightF = false;
+    private boolean upF = false;
+    private boolean downF = false;
+    private boolean fire = false;
     private Image barikada;
     private Image tank1;
     private Image tank2;
     private Image tank3;
     private Image tank4;
     private Image tank;
+    private Image bomb;
     private Timer timer;
 
 
@@ -56,6 +60,8 @@ public class GameFieldTank extends JPanel implements ActionListener {
         tank3 = iib4.getImage();
         ImageIcon iib5 = new ImageIcon("resources\\tank\\tank4.png");
         tank4 = iib5.getImage();
+        ImageIcon iib6 = new ImageIcon("resources\\tank\\fire.png");
+        bomb = iib6.getImage();
     }
 
     private Random rand =new Random();
@@ -74,6 +80,12 @@ public class GameFieldTank extends JPanel implements ActionListener {
                     j = 120;
                 }
             }
+        }
+        for(int i = 1; i<20; i++){
+            Projectail[i][1] = 0;
+            Projectail[i][2] = - 32;
+            Projectail[i][3] = - 32;
+            Projectail[i][4] = 0;
         }
     }
 
@@ -126,14 +138,86 @@ public class GameFieldTank extends JPanel implements ActionListener {
     }
 
     private void Projectail(){
-
+        if (fire){
+            for(int i=1; i<20; i++){
+                if (Projectail[i][1]==0){
+                    if (upF){
+                        Projectail[i][1]=1;
+                        Projectail[i][2]=x1;
+                        Projectail[i][3]=y1;
+                        Projectail[i][4]=1;
+                        i=21;
+                    }else{
+                        if (rightF){
+                            Projectail[i][1]=1;
+                            Projectail[i][2]=x1;
+                            Projectail[i][3]=y1;
+                            Projectail[i][4]=2;
+                            i=21;
+                        }else{
+                            if (downF){
+                                Projectail[i][1]=1;
+                                Projectail[i][2]=x1;
+                                Projectail[i][3]=y1;
+                                Projectail[i][4]=3;
+                                i=21;
+                            }else{
+                                if (leftF){
+                                    Projectail[i][1]=1;
+                                    Projectail[i][2]=x1;
+                                    Projectail[i][3]=y1;
+                                    Projectail[i][4]=4;
+                                    i=21;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            fire=false;
+        }
     }
+
+    private void MoveProjectail(){
+        for(int i=1; i<21; i++){
+            if(Projectail[i][4]== 1){
+                Projectail[i][3]=Projectail[i][3]-32;
+                if(Projectail[i][3]==-32){
+                    Projectail[i][1]=0;
+                }
+            }else{
+                if(Projectail[i][4]== 2){
+                    Projectail[i][2]=Projectail[i][2]+32;
+                    if(Projectail[i][2]==672){
+                        Projectail[i][1]=0;
+                    }
+                }else{
+                    if(Projectail[i][4]== 3){
+                        Projectail[i][3]=Projectail[i][3]+32;
+                        if(Projectail[i][3]==672){
+                            Projectail[i][1]=0;
+                        }
+                    }else{
+                        if(Projectail[i][4]== 4){
+                            Projectail[i][2]=Projectail[i][2]-32;
+                            if(Projectail[i][2]==-32){
+                                Projectail[i][1]=0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
-       CheckColision();
-       move();
-       repaint();
+        CheckColision();
+        move();
+        Projectail();
+        MoveProjectail();
+        repaint();
     }
 
     // Отрисовка объектов
@@ -144,6 +228,11 @@ public class GameFieldTank extends JPanel implements ActionListener {
             g.drawImage(barikada, x[i], y[i], this);
         }
         g.drawImage(tank, x1, y1, this);
+        for(int i=1; i<20; i++){
+            if(Projectail[i][1] == 1){
+                g.drawImage(bomb,Projectail[i][2],Projectail[i][3],this);
+            }
+        }
     }
 
     class FieldKeyListener extends KeyAdapter {
@@ -153,16 +242,35 @@ public class GameFieldTank extends JPanel implements ActionListener {
             int key = e.getKeyCode();
             if(key == KeyEvent.VK_LEFT){
                 left = true;
+                leftF = true;
+                rightF = false;
+                upF = false;
+                downF = false;
             }
             if(key == KeyEvent.VK_RIGHT){
                 right = true;
+                rightF = true;
+                leftF = false;
+                upF = false;
+                downF = false;
             }
 
             if(key == KeyEvent.VK_UP){
                 up = true;
+                upF = true;
+                leftF = false;
+                rightF = false;
+                downF = false;
             }
             if(key == KeyEvent.VK_DOWN){
                 down = true;
+                downF = true;
+                leftF = false;
+                rightF = false;
+                upF = false;
+            }
+            if(key == KeyEvent.VK_SPACE){
+                fire = true;
             }
         }
     }
