@@ -5,13 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c293d9d3-3400-4d0a-89c3-7767e1c0a511" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/zmeika/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zmeika/GameFieldZmeika.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/zmeika/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zmeika/GameWindowZmeika.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/zmeika/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zmeika/MainWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/zmeika/Tutorial.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/zmeika/TutorialWindow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Berry1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Berry2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Berry3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Keybord.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/debug.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/dot.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/zmeika/GameFieldTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/zmeika/TutorialTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -35,6 +54,9 @@
     </option>
   </component>
   <component name="ProjectId" id="24BEkO7Fn6g7o6YF8d3kNvOnlru" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -46,6 +68,47 @@
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Git\Games\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Maven.Build">
+    <configuration name="Start" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Games.MainWindow" />
+      <module name="java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Build" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Start" />
+      <item itemvalue="Maven.Build" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

@@ -1,4 +1,4 @@
-package zmeika;
+package Games;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +10,7 @@ import java.util.Random;
 
 import static java.lang.Math.abs;
 
-public class GameField extends JPanel implements ActionListener {
+public class GameFieldZmeika extends JPanel implements ActionListener {
     private final int SIZE = 320;
     private final int DOT_SIZE = 16;
     private final int ALL_DOTS = 400;
@@ -47,7 +47,7 @@ public class GameField extends JPanel implements ActionListener {
     private String Minutes;
     private String Seconds;
 
-    public GameField() {
+    public GameFieldZmeika() {
         setBackground(Color.black);
         loadImages();
         initGame();
@@ -57,7 +57,7 @@ public class GameField extends JPanel implements ActionListener {
     }
 
     // Стартовые данные
-    public int initGame() {
+    public void initGame() {
         dots = 3;
         for (int i = 0; i < dots + 2; i++) {
             x[i] = 96 - i * DOT_SIZE;
@@ -65,7 +65,6 @@ public class GameField extends JPanel implements ActionListener {
         }
         minutes = minutesStart;
         seconds = secondsStart;
-        return (x[1]);
     }
 
     // Обновленние окна
@@ -78,16 +77,14 @@ public class GameField extends JPanel implements ActionListener {
     }
 
     // Проверка появленния ягоды в змейке
-    public boolean berry1(int x, int y,int berryX1,int berryY1){
+    public void berry1(int x, int y,int berryX1,int berryY1){
         if (berryX1 == x && berryY1 == y) {
             createBerry1();
-            return true;
         }
-        return false;
     }
 
     // Создание ягоды
-    public int createBerry1() {
+    public void createBerry1() {
         berryX1 = new Random().nextInt(20) * DOT_SIZE;
         berryY1 = new Random().nextInt(20) * DOT_SIZE;
         for (int i = dots; i > 0; i--) {
@@ -99,20 +96,17 @@ public class GameField extends JPanel implements ActionListener {
         if (abs(berryX1 - berryX3) < DBB && abs(berryY1 - berryY3) < DBB) {
             createBerry1();
         }
-        return (berryX1);
     }
 
     // Проверка появленния ягоды в змейке
-    public boolean berry2(int x, int y,int berryX2,int berryY2){
+    public void berry2(int x, int y,int berryX2,int berryY2){
         if (berryX2 == x && berryY2 == y) {
             createBerry2();
-            return true;
         }
-        return false;
     }
 
     // Создание ягоды
-    public int createBerry2() {
+    public void createBerry2() {
         berryX2 = new Random().nextInt(20) * DOT_SIZE;
         berryY2 = new Random().nextInt(20) * DOT_SIZE;
         for (int i = dots; i > 0; i--) {
@@ -124,20 +118,17 @@ public class GameField extends JPanel implements ActionListener {
         if (abs(berryX2 - berryX3) < DBB && abs(berryY2 - berryY3) < DBB) {
             createBerry2();
         }
-        return (berryX2);
     }
 
     // Проверка появленния ягоды в змейке
-    public boolean berry3(int x, int y,int berryX3,int berryY3){
+    public void berry3(int x, int y,int berryX3,int berryY3){
         if (berryX3 == x && berryY3 == y) {
             createBerry3();
-            return true;
         }
-        return false;
     }
 
     // Создание ягоды
-    public int createBerry3() {
+    public void createBerry3() {
         berryX3 = new Random().nextInt(20) * DOT_SIZE;
         berryY3 = new Random().nextInt(20) * DOT_SIZE;
         for (int i = dots; i > 0; i--) {
@@ -149,20 +140,18 @@ public class GameField extends JPanel implements ActionListener {
         if (abs(berryX3 - berryX2) < DBB && abs(berryY3 - berryY2) < DBB) {
             createBerry3();
         }
-        return (berryX3);
     }
 
     // Подгрузка изображенний
-    public Image loadImages() {
-        ImageIcon iib1 = new ImageIcon("classes\\Berry1.png");
+    public void loadImages() {
+        ImageIcon iib1 = new ImageIcon("classes\\resources\\Berry1.png");
         berry1 = iib1.getImage();
-        ImageIcon iib2 = new ImageIcon("classes\\Berry2.png");
+        ImageIcon iib2 = new ImageIcon("classes\\resources\\Berry2.png");
         berry2 = iib2.getImage();
-        ImageIcon iib3 = new ImageIcon("classes\\Berry3.png");
+        ImageIcon iib3 = new ImageIcon("classes\\resources\\Berry3.png");
         berry3 = iib3.getImage();
-        ImageIcon iid = new ImageIcon("classes\\dot.png");
+        ImageIcon iid = new ImageIcon("classes\\resources\\dot.png");
         dot = iid.getImage();
-        return(dot);
     }
 
     // Отрисовка объектов
@@ -198,7 +187,7 @@ public class GameField extends JPanel implements ActionListener {
     }
 
     // Таймер, оставшегося времени
-    public int Timer(int n1,int min,int sec) {
+    public void Timer(int n1,int min,int sec) {
         if (n1 > 4) {
             n1 = 1;
             if (sec == 0) {
@@ -213,68 +202,58 @@ public class GameField extends JPanel implements ActionListener {
             minutes = min;
             seconds = sec;
         }
-        return(min);
     }
 
     // Перемещение змейки
-    public int move(int PredX, int PredY,int i) {
+    public void move(int PredX, int PredY,int i) {
             x[i] = PredX;
             y[i] = PredY;
-            return(x[i]);
     }
 
     // Изменнение положения змейки по горизонтали
-    public int horizontal(boolean left, boolean right) {
+    public void horizontal(boolean left, boolean right) {
         if (left) {
             x[0] -= DOT_SIZE;
         }
         if (right) {
             x[0] += DOT_SIZE;
         }
-        return(x[0]);
     }
 
     // Изменнение положения змейки по вертикали
-    public int vertical(boolean up, boolean down){
+    public void vertical(boolean up, boolean down){
         if(up){
             y[0] -= DOT_SIZE;
         } if(down){
             y[0] += DOT_SIZE;
         }
-        return(y[0]);
     }
 
     // Проверка поедания ягоды
-    public boolean checkBerry1(int X, int Y,int berryX1,int berryY1) {
+    public void checkBerry1(int X, int Y,int berryX1,int berryY1) {
         if (X == berryX1 && Y == berryY1) {
             dots = dots + 1;
             number = number + 1;
             createBerry1();
-            return(true);
         }
-        return false;
     }
 
     // Проверка поедания ягоды
-    public boolean checkBerry2(int X,int Y,int berryX2,int berryY2) {
+    public void checkBerry2(int X,int Y,int berryX2,int berryY2) {
         if (X == berryX2 && Y == berryY2) {
             dots = dots + 2;
             number = number + 2;
             createBerry2();
-            return(true);
         }
-        return false;
     }
 
     // Проверка поедания ягоды
-    public boolean checkBerry3(int X, int Y, int berryX3,int berryY3) {
+    public void checkBerry3(int X, int Y, int berryX3,int berryY3) {
         if(X == berryX3 && Y == berryY3){
             dots = dots +3;
             number = number + 3;
             createBerry3();
-            return(true);
         }
-        return false;
     }
 
     // Проверка столкновений
