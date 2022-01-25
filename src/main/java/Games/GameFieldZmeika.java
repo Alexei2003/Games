@@ -83,10 +83,12 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
         }
     }
 
+    private Random rand =new Random();
+
     // Создание ягоды
     private void createBerry1() {
-        berryX1 = new Random().nextInt(20) * DOT_SIZE;
-        berryY1 = new Random().nextInt(20) * DOT_SIZE;
+        berryX1 = rand.nextInt(20) * DOT_SIZE;
+        berryY1 = rand.nextInt(20) * DOT_SIZE;
         for (int i = dots; i > 0; i--) {
             berry1(x[i],y[i],berryX1,berryY1);
         }
@@ -107,8 +109,8 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
 
     // Создание ягоды
     private void createBerry2() {
-        berryX2 = new Random().nextInt(20) * DOT_SIZE;
-        berryY2 = new Random().nextInt(20) * DOT_SIZE;
+        berryX2 = rand.nextInt(20) * DOT_SIZE;
+        berryY2 = rand.nextInt(20) * DOT_SIZE;
         for (int i = dots; i > 0; i--) {
             berry2(x[i],y[i],berryX2,berryY2);
         }
@@ -129,8 +131,8 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
 
     // Создание ягоды
     private void createBerry3() {
-        berryX3 = new Random().nextInt(20) * DOT_SIZE;
-        berryY3 = new Random().nextInt(20) * DOT_SIZE;
+        berryX3 = rand.nextInt(20) * DOT_SIZE;
+        berryY3 = rand.nextInt(20) * DOT_SIZE;
         for (int i = dots; i > 0; i--) {
             berry3(x[i],y[i],berryX3,berryY3);
         }

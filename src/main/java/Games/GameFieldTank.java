@@ -14,6 +14,7 @@ public class GameFieldTank extends JPanel implements ActionListener {
     private final int ALL_DOTS = 400;
     private int[] x = new int[ALL_DOTS];
     private int[] y = new int[ALL_DOTS];
+    private int[] [] Projectail = new int[21][4];
     private int x1;
     private int y1;
     private int x2;
@@ -31,6 +32,7 @@ public class GameFieldTank extends JPanel implements ActionListener {
     private Image tank4;
     private Image tank;
     private Timer timer;
+
 
 
     public GameFieldTank(){
@@ -56,14 +58,16 @@ public class GameFieldTank extends JPanel implements ActionListener {
         tank4 = iib5.getImage();
     }
 
+    private Random rand =new Random();
+
     private void initGame() {
-        x1 = new Random().nextInt(20)*32;
-        y1 = new Random().nextInt(20)*32;
-        x2 = new Random().nextInt(20)*32;
-        y2 = new Random().nextInt(20)*32;
+        x1 = rand.nextInt(20)*32;
+        y1 = rand.nextInt(20)*32;
+        x2 = rand.nextInt(20)*32;
+        y2 = rand.nextInt(20)*32;
         for (int i = 1; i < 70; i++){
-            x[i] = new Random().nextInt(20)*32;
-            y[i] = new Random().nextInt(20)*32;
+            x[i] = rand.nextInt(20)*32;
+            y[i] = rand.nextInt(20)*32;
             for (int j = 1; j < i; j++){
                 if (((x[i] <= x[j]+32) && (x[i] >= x[j]-32) && (y[i] <= y[j]+32) && (y[i] >= y[j]-32)) || (x[i] == x1) || (x[i] == x2) || (y[i] == y1) || (y[i] == y2)){
                     i = i-1;
@@ -104,8 +108,30 @@ public class GameFieldTank extends JPanel implements ActionListener {
         }
     }
 
+    private void CheckColision(){
+        for(int i=1; i<70; i++){
+            if ((x1+32 == x[i]) && (y1 == y[i]) && (right)){
+                right = false;
+            }
+            if ((x1-32 == x[i]) && (y1 == y[i]) && (left)){
+                left = false;
+            }
+            if ((y1+32 == y[i]) && (x1 == x[i]) && (down)){
+                down = false;
+            }
+            if ((y1-32 == y[i]) && (x1 == x[i]) && (up)){
+                up = false;
+            }
+        }
+    }
+
+    private void Projectail(){
+
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
+       CheckColision();
        move();
        repaint();
     }
