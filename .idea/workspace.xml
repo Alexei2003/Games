@@ -6,19 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c293d9d3-3400-4d0a-89c3-7767e1c0a511" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zmeika/GameField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zmeika/GameFieldZmeika.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zmeika/GameWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zmeika/GameWindowZmeika.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zmeika/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zmeika/MainWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zmeika/Tutorial.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zmeika/TutorialWindow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Berry1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Berry2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Berry3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Keybord.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/debug.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/dot.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/zmeika/GameFieldTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/zmeika/TutorialTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dependency-reduced-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dependency-reduced-pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Games/GameFieldZmeika.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/GameFieldZmeika.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
