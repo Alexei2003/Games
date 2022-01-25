@@ -94,26 +94,40 @@ public class GameFieldTank extends JPanel implements ActionListener {
         timer.start();
     }
 
+    private void Rotation(){
+        if (upF){
+            tank = tank1;
+        }else{
+            if (rightF){
+                tank = tank2;
+            }else{
+                if (downF){
+                    tank = tank3;
+                }else{
+                    if (leftF){
+                        tank = tank4;
+                    }
+                }
+            }
+        }
+    }
+
     private void move(){
         if (up){
             y1 = y1-32;
             up = false;
-            tank = tank1;
         }else{
             if (right){
                 x1 = x1+32;
                 right = false;
-                tank = tank2;
             }else{
                 if (down){
                     y1 = y1+32;
                     down  = false;
-                    tank = tank3;
                 }else{
                     if (left){
                         x1 = x1-32;
                         left = false;
-                        tank = tank4;
                     }
                 }
             }
@@ -135,6 +149,19 @@ public class GameFieldTank extends JPanel implements ActionListener {
                 up = false;
             }
         }
+        if ((x1+32 == 640)&& (right)){
+            right = false;
+        }
+        if ((x1-32 == 0) && (left)){
+            left = false;
+        }
+        if ((y1+32 == 640) && (down)){
+            down = false;
+        }
+        if ((y1-32 == 0) && (up)){
+            up = false;
+        }
+
     }
 
     private void Projectail(){
@@ -185,11 +212,21 @@ public class GameFieldTank extends JPanel implements ActionListener {
                 if(Projectail[i][3]==-32){
                     Projectail[i][1]=0;
                 }
+                for(int j=1; j<70; j++){
+                    if((x[j]==Projectail[i][2]) && (y[j]==Projectail[i][3])){
+                        Projectail[i][1]=0;
+                    }
+                }
             }else{
                 if(Projectail[i][4]== 2){
                     Projectail[i][2]=Projectail[i][2]+32;
                     if(Projectail[i][2]==672){
                         Projectail[i][1]=0;
+                    }
+                    for(int j=1; j<70; j++){
+                        if((x[j]==Projectail[i][2]) && (y[j]==Projectail[i][3])){
+                            Projectail[i][1]=0;
+                        }
                     }
                 }else{
                     if(Projectail[i][4]== 3){
@@ -197,11 +234,21 @@ public class GameFieldTank extends JPanel implements ActionListener {
                         if(Projectail[i][3]==672){
                             Projectail[i][1]=0;
                         }
+                        for(int j=1; j<70; j++){
+                            if((x[j]==Projectail[i][2]) && (y[j]==Projectail[i][3])){
+                                Projectail[i][1]=0;
+                            }
+                        }
                     }else{
                         if(Projectail[i][4]== 4){
                             Projectail[i][2]=Projectail[i][2]-32;
                             if(Projectail[i][2]==-32){
                                 Projectail[i][1]=0;
+                            }
+                            for(int j=1; j<70; j++){
+                                if((x[j]==Projectail[i][2]) && (y[j]==Projectail[i][3])){
+                                    Projectail[i][1]=0;
+                                }
                             }
                         }
                     }
@@ -214,6 +261,7 @@ public class GameFieldTank extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         CheckColision();
+        Rotation();
         move();
         Projectail();
         MoveProjectail();
@@ -241,14 +289,18 @@ public class GameFieldTank extends JPanel implements ActionListener {
             super.keyPressed(e);
             int key = e.getKeyCode();
             if(key == KeyEvent.VK_LEFT){
-                left = true;
+                if(leftF){
+                    left = true;
+                }
                 leftF = true;
                 rightF = false;
                 upF = false;
                 downF = false;
             }
             if(key == KeyEvent.VK_RIGHT){
-                right = true;
+                if(rightF){
+                    right = true;
+                }
                 rightF = true;
                 leftF = false;
                 upF = false;
@@ -256,14 +308,18 @@ public class GameFieldTank extends JPanel implements ActionListener {
             }
 
             if(key == KeyEvent.VK_UP){
-                up = true;
+                if(upF){
+                    up = true;
+                }
                 upF = true;
                 leftF = false;
                 rightF = false;
                 downF = false;
             }
             if(key == KeyEvent.VK_DOWN){
-                down = true;
+                if(downF){
+                    down = true;
+                }
                 downF = true;
                 leftF = false;
                 rightF = false;
