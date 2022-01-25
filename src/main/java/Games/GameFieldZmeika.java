@@ -144,13 +144,13 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
 
     // Подгрузка изображенний
     public void loadImages() {
-        ImageIcon iib1 = new ImageIcon("resources\\Berry1.png");
+        ImageIcon iib1 = new ImageIcon("resources\\zmeika\\Berry1.png");
         berry1 = iib1.getImage();
-        ImageIcon iib2 = new ImageIcon("resources\\Berry2.png");
+        ImageIcon iib2 = new ImageIcon("resources\\zmeika\\Berry2.png");
         berry2 = iib2.getImage();
-        ImageIcon iib3 = new ImageIcon("resources\\Berry3.png");
+        ImageIcon iib3 = new ImageIcon("resources\\zmeika\\Berry3.png");
         berry3 = iib3.getImage();
-        ImageIcon iid = new ImageIcon("resources\\dot.png");
+        ImageIcon iid = new ImageIcon("resources\\zmeika\\dot.png");
         dot = iid.getImage();
     }
 
