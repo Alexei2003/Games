@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 public class ChangeGame extends JFrame {
     private JButton Zmeika;
     private JButton Tank;
-    private GameWindowZmeika GW;
+    private JFrame Window;
     private JPanel panel;
     public ChangeGame() {
         setTitle("Выбор игры");
@@ -17,22 +17,24 @@ public class ChangeGame extends JFrame {
         Zmeika = new JButton("Змейка");
         Tank = new JButton("Танки");
 
-        GW = new GameWindowZmeika();
-        GW.setVisible(false);
+        Window = new Windows();
+        Window.setVisible(false);
 
         // Нажатие кнопок
         Zmeika.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                GW.dispose();
-                GW = new GameWindowZmeika();
-                GW.setVisible(true);
+                Window.dispose();
+                Window = new GameWindowZmeika();
+                Window.setVisible(true);
             }
         });
         Tank.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Window.dispose();
+                Window = new GameWindowTank();
+                Window.setVisible(true);
             }
         });
         panel.add(Zmeika);

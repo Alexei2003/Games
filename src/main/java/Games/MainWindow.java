@@ -12,7 +12,7 @@ public class MainWindow extends JFrame {
     public MainWindow(){
         setTitle("Главное меню");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(150, 150);
+        setSize(150, 125);
         setLocation(700, 200);
         panel = new JPanel();
         start = new JButton("Выбрать игру");

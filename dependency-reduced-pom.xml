@@ -136,7 +136,7 @@
     <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <sonar.organization>Games</sonar.organization>
+    <sonar.organization>zmeika</sonar.organization>
   </properties>
 </project>
 
