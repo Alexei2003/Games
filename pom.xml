@@ -106,7 +106,7 @@
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>zmeika.MainWindow</mainClass>
+                                    <mainClass>Games.MainWindow</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
