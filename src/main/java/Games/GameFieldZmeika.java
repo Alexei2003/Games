@@ -31,7 +31,7 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
     private int number = 0;
     private int speadUp = 10;
     private int n = 0;
-    private int minutesStart = 3;
+    private int minutesStart = 5;
     private int secondsStart = 0;
     private int minutes;
     private int seconds;
@@ -42,7 +42,7 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
     private boolean down = false;
     private boolean inGame = true;
     private boolean Finish = true;
-    private String Timer = "3.00";
+    private String Timer = "5.00";
     private String Number;
     private String Minutes;
     private String Seconds;
@@ -57,7 +57,7 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
     }
 
     // Стартовые данные
-    public void initGame() {
+    private void initGame() {
         dots = 3;
         for (int i = 0; i < dots + 2; i++) {
             x[i] = 96 - i * DOT_SIZE;
@@ -68,7 +68,7 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
     }
 
     // Обновленние окна
-    public void timer() {
+    private void timer() {
         timer = new Timer(250, this);
         timer.start();
         createBerry1();
@@ -77,14 +77,14 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
     }
 
     // Проверка появленния ягоды в змейке
-    public void berry1(int x, int y,int berryX1,int berryY1){
+    private void berry1(int x, int y,int berryX1,int berryY1){
         if (berryX1 == x && berryY1 == y) {
             createBerry1();
         }
     }
 
     // Создание ягоды
-    public void createBerry1() {
+    private void createBerry1() {
         berryX1 = new Random().nextInt(20) * DOT_SIZE;
         berryY1 = new Random().nextInt(20) * DOT_SIZE;
         for (int i = dots; i > 0; i--) {
@@ -99,14 +99,14 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
     }
 
     // Проверка появленния ягоды в змейке
-    public void berry2(int x, int y,int berryX2,int berryY2){
+    private void berry2(int x, int y,int berryX2,int berryY2){
         if (berryX2 == x && berryY2 == y) {
             createBerry2();
         }
     }
 
     // Создание ягоды
-    public void createBerry2() {
+    private void createBerry2() {
         berryX2 = new Random().nextInt(20) * DOT_SIZE;
         berryY2 = new Random().nextInt(20) * DOT_SIZE;
         for (int i = dots; i > 0; i--) {
@@ -121,14 +121,14 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
     }
 
     // Проверка появленния ягоды в змейке
-    public void berry3(int x, int y,int berryX3,int berryY3){
+    private void berry3(int x, int y,int berryX3,int berryY3){
         if (berryX3 == x && berryY3 == y) {
             createBerry3();
         }
     }
 
     // Создание ягоды
-    public void createBerry3() {
+    private void createBerry3() {
         berryX3 = new Random().nextInt(20) * DOT_SIZE;
         berryY3 = new Random().nextInt(20) * DOT_SIZE;
         for (int i = dots; i > 0; i--) {
@@ -143,7 +143,7 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
     }
 
     // Подгрузка изображенний
-    public void loadImages() {
+    private void loadImages() {
         ImageIcon iib1 = new ImageIcon("resources\\zmeika\\Berry1.png");
         berry1 = iib1.getImage();
         ImageIcon iib2 = new ImageIcon("resources\\zmeika\\Berry2.png");
@@ -187,7 +187,7 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
     }
 
     // Таймер, оставшегося времени
-    public void Timer(int n1,int min,int sec) {
+    private void Timer(int n1,int min,int sec) {
         if (n1 > 4) {
             n1 = 1;
             if (sec == 0) {
@@ -205,13 +205,13 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
     }
 
     // Перемещение змейки
-    public void move(int PredX, int PredY,int i) {
+    private void move(int PredX, int PredY,int i) {
             x[i] = PredX;
             y[i] = PredY;
     }
 
     // Изменнение положения змейки по горизонтали
-    public void horizontal(boolean left, boolean right) {
+    private void horizontal(boolean left, boolean right) {
         if (left) {
             x[0] -= DOT_SIZE;
         }
@@ -221,7 +221,7 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
     }
 
     // Изменнение положения змейки по вертикали
-    public void vertical(boolean up, boolean down){
+    private void vertical(boolean up, boolean down){
         if(up){
             y[0] -= DOT_SIZE;
         } if(down){
@@ -230,7 +230,7 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
     }
 
     // Проверка поедания ягоды
-    public void checkBerry1(int X, int Y,int berryX1,int berryY1) {
+    private void checkBerry1(int X, int Y,int berryX1,int berryY1) {
         if (X == berryX1 && Y == berryY1) {
             dots = dots + 1;
             number = number + 1;
@@ -239,7 +239,7 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
     }
 
     // Проверка поедания ягоды
-    public void checkBerry2(int X,int Y,int berryX2,int berryY2) {
+    private void checkBerry2(int X,int Y,int berryX2,int berryY2) {
         if (X == berryX2 && Y == berryY2) {
             dots = dots + 2;
             number = number + 2;
@@ -248,7 +248,7 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
     }
 
     // Проверка поедания ягоды
-    public void checkBerry3(int X, int Y, int berryX3,int berryY3) {
+    private void checkBerry3(int X, int Y, int berryX3,int berryY3) {
         if(X == berryX3 && Y == berryY3){
             dots = dots +3;
             number = number + 3;
@@ -257,7 +257,7 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
     }
 
     // Проверка столкновений
-    public void checkCollisions(){
+    private void checkCollisions(){
         for (int i = dots-1; i >0 ; i--) {
             if(i>4 && x[0] == x[i] && y[0] == y[i]){
                 inGame = false;

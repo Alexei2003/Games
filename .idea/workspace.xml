@@ -6,9 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="c293d9d3-3400-4d0a-89c3-7767e1c0a511" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dependency-reduced-pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dependency-reduced-pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Games/ChangeGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/ChangeGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Games/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/MainWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/resources/zmeika/Berry1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/resources/zmeika/Berry2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/resources/zmeika/Berry3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/resources/zmeika/dot.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Games/GameFieldTank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/GameFieldTank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Games/GameFieldZmeika.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/GameFieldZmeika.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Games/GameWindowTank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/GameWindowTank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Games/ChangeGame$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Games/ChangeGame$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Games/GameFieldZmeika.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Games/GameFieldZmeika.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Games/GameWindowTank.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Games/GameWindowTank.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/java-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/java-1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/original-java-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/original-java-1.0.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

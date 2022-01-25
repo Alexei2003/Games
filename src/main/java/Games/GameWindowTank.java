@@ -5,8 +5,8 @@ import javax.swing.*;
 public class GameWindowTank extends JFrame {
     public GameWindowTank() {
         setTitle("Игровое поле");
-        setSize(352, 447);
-        setLocation(300, 200);
+        setSize(652, 652);
+        setLocation(100, 100);
         add(new GameFieldTank());
     }
 }
