@@ -15,10 +15,16 @@ public class GameFieldTank extends JPanel implements ActionListener {
     private int[] x = new int[ALL_DOTS];
     private int[] y = new int[ALL_DOTS];
     private int[] [] Projectail = new int[21][5];
-    private int x1;
-    private int y1;
-    private int x2;
-    private int y2;
+    private int[] [] Projectail2 = new int[21][5];
+    private int X;
+    private int Y;
+    private int N;
+    private int X2;
+    private int Y2;
+    private int N2;
+    private int T2;
+    private int Temp1;
+    private int Temp2;
     private boolean left = false;
     private boolean right = false;
     private boolean up = false;
@@ -28,14 +34,26 @@ public class GameFieldTank extends JPanel implements ActionListener {
     private boolean upF = false;
     private boolean downF = false;
     private boolean fire = false;
+    private boolean left2 = false;
+    private boolean right2 = false;
+    private boolean up2 = false;
+    private boolean down2 = false;
+    private boolean fire2 = false;
     private Image barikada;
     private Image tank1;
     private Image tank2;
     private Image tank3;
     private Image tank4;
-    private Image tank;
+    private Image tank5;
     private Image bomb;
+    private Image tank21;
+    private Image tank22;
+    private Image tank23;
+    private Image tank24;
+    private Image tank25;
+    private Image bomb2;
     private Timer timer;
+    private Random rand =new Random();
 
 
 
@@ -52,7 +70,7 @@ public class GameFieldTank extends JPanel implements ActionListener {
         ImageIcon iib1 = new ImageIcon("resources\\tank\\barikada.png");
         barikada = iib1.getImage();
         ImageIcon iib2 = new ImageIcon("resources\\tank\\tank1.png");
-        tank = iib2.getImage();
+        tank5 = iib2.getImage();
         tank1 = iib2.getImage();
         ImageIcon iib3 = new ImageIcon("resources\\tank\\tank2.png");
         tank2 = iib3.getImage();
@@ -62,20 +80,28 @@ public class GameFieldTank extends JPanel implements ActionListener {
         tank4 = iib5.getImage();
         ImageIcon iib6 = new ImageIcon("resources\\tank\\fire.png");
         bomb = iib6.getImage();
+        ImageIcon iib7 = new ImageIcon("resources\\tank\\tank21.png");
+        tank21 = iib7.getImage();
+        ImageIcon iib8 = new ImageIcon("resources\\tank\\tank22.png");
+        tank22 = iib8.getImage();
+        ImageIcon iib9 = new ImageIcon("resources\\tank\\tank23.png");
+        tank23 = iib9.getImage();
+        ImageIcon iib10 = new ImageIcon("resources\\tank\\tank24.png");
+        tank24 = iib10.getImage();
+        ImageIcon iib11 = new ImageIcon("resources\\tank\\fire2.png");
+        bomb2 = iib11.getImage();
     }
 
-    private Random rand =new Random();
-
     private void initGame() {
-        x1 = rand.nextInt(20)*32;
-        y1 = rand.nextInt(20)*32;
-        x2 = rand.nextInt(20)*32;
-        y2 = rand.nextInt(20)*32;
+        X = rand.nextInt(20)*32;
+        Y = rand.nextInt(20)*32;
+        X2 = rand.nextInt(20)*32;
+        Y2 = rand.nextInt(20)*32;
         for (int i = 1; i < 70; i++){
             x[i] = rand.nextInt(20)*32;
             y[i] = rand.nextInt(20)*32;
             for (int j = 1; j < i; j++){
-                if (((x[i] <= x[j]+32) && (x[i] >= x[j]-32) && (y[i] <= y[j]+32) && (y[i] >= y[j]-32)) || (x[i] == x1) || (x[i] == x2) || (y[i] == y1) || (y[i] == y2)){
+                if (((x[i] <= x[j]+32) && (x[i] >= x[j]-32) && (y[i] <= y[j]+32) && (y[i] >= y[j]-32)) || (x[i] == X) || (y[i] == Y)){
                     i = i-1;
                     j = 120;
                 }
@@ -87,6 +113,13 @@ public class GameFieldTank extends JPanel implements ActionListener {
             Projectail[i][3] = - 32;
             Projectail[i][4] = 0;
         }
+        for(int i = 1; i<20; i++){
+            Projectail2[i][1] = 0;
+            Projectail2[i][2] = - 32;
+            Projectail2[i][3] = - 32;
+            Projectail2[i][4] = 0;
+        }
+        T2=1;
     }
 
     private void timer() {
@@ -94,18 +127,60 @@ public class GameFieldTank extends JPanel implements ActionListener {
         timer.start();
     }
 
+    private  void bot2(){
+        if(T2==1){
+            N=rand.nextInt(2);
+            if((X-X2>0)){
+                Temp1=2;
+            }else{
+                Temp1=4;
+            }
+            if((Y-Y2>0)){
+                Temp2=3;
+            }else{
+                Temp2=1;
+            }
+            if(N==1){
+                N2=Temp1;
+            }else{
+                N2=Temp2;
+            }
+            T2=2;
+        }else{
+            T2=1;
+        }
+    }
+
     private void Rotation(){
         if (upF){
-            tank = tank1;
+            tank5 = tank1;
         }else{
             if (rightF){
-                tank = tank2;
+                tank5 = tank2;
             }else{
                 if (downF){
-                    tank = tank3;
+                    tank5 = tank3;
                 }else{
                     if (leftF){
-                        tank = tank4;
+                        tank5 = tank4;
+                    }
+                }
+            }
+        }
+    }
+
+    private void Rotation2(){
+        if (N2==1){
+            tank25 = tank21;
+        }else{
+            if (N2==2){
+                tank25 = tank22;
+            }else{
+                if (N2==3){
+                    tank25 = tank23;
+                }else{
+                    if (N2==4){
+                        tank25 = tank24;
                     }
                 }
             }
@@ -114,20 +189,38 @@ public class GameFieldTank extends JPanel implements ActionListener {
 
     private void move(){
         if (up){
-            y1 = y1-32;
+            Y = Y -32;
             up = false;
         }else{
             if (right){
-                x1 = x1+32;
+                X = X+32;
                 right = false;
             }else{
                 if (down){
-                    y1 = y1+32;
+                    Y = Y +32;
                     down  = false;
                 }else{
                     if (left){
-                        x1 = x1-32;
+                        X = X-32;
                         left = false;
+                    }
+                }
+            }
+        }
+    }
+
+    private void move2(){
+        if ((N2==1) && (T2==1)){
+            Y2 = Y2 -32;
+        }else{
+            if ((N2==2) && (T2==1)){
+                X2 = X2+32;
+            }else{
+                if ((N2==3) && (T2==1)){
+                    Y2 = Y2 +32;
+                }else{
+                    if ((N2==4) && (T2==1)){
+                        X2 = X2-32;
                     }
                 }
             }
@@ -136,32 +229,60 @@ public class GameFieldTank extends JPanel implements ActionListener {
 
     private void CheckColision(){
         for(int i=1; i<70; i++){
-            if ((x1+32 == x[i]) && (y1 == y[i]) && (right)){
+            if ((X+32 == x[i]) && (Y == y[i]) && (right)){
                 right = false;
             }
-            if ((x1-32 == x[i]) && (y1 == y[i]) && (left)){
+            if ((X-32 == x[i]) && (Y == y[i]) && (left)){
                 left = false;
             }
-            if ((y1+32 == y[i]) && (x1 == x[i]) && (down)){
+            if ((Y +32 == y[i]) && (X == x[i]) && (down)){
                 down = false;
             }
-            if ((y1-32 == y[i]) && (x1 == x[i]) && (up)){
+            if ((Y -32 == y[i]) && (X == x[i]) && (up)){
                 up = false;
             }
         }
-        if ((x1+32 == 640)&& (right)){
+        if ((X+32 == 640)&& (right)){
             right = false;
         }
-        if ((x1-32 == 0) && (left)){
+        if ((X-32 == 0) && (left)){
             left = false;
         }
-        if ((y1+32 == 640) && (down)){
+        if ((Y +32 == 640) && (down)){
             down = false;
         }
-        if ((y1-32 == 0) && (up)){
+        if ((Y -32 == 0) && (up)){
             up = false;
         }
+    }
 
+    private void CheckColision2(){
+        for(int i=1; i<70; i++){
+            if ((X2+32 == x[i]) && (Y2 == y[i]) && (N2==2)){
+                N2=0;
+            }
+            if ((X2-32 == x[i]) && (Y2 == y[i]) && (N2==4)){
+                N2=0;
+            }
+            if ((Y2 +32 == y[i]) && (X2 == x[i]) && (N2==3)){
+                N2=0;
+            }
+            if ((Y2 -32 == y[i]) && (X2 == x[i]) && (N2==1)){
+                N2=0;
+            }
+        }
+        if ((X2+32 == 640)&& (N2==2)){
+            N2=0;
+        }
+        if ((X2-32 == 0) && (N2==4)){
+            N2=0;
+        }
+        if ((Y2+32 == 640) && (N2==3)){
+            N2=0;
+        }
+        if ((Y2-32 == 0) && (N2==1)){
+            N2=0;
+        }
     }
 
     private void Projectail(){
@@ -170,29 +291,29 @@ public class GameFieldTank extends JPanel implements ActionListener {
                 if (Projectail[i][1]==0){
                     if (upF){
                         Projectail[i][1]=1;
-                        Projectail[i][2]=x1;
-                        Projectail[i][3]=y1;
+                        Projectail[i][2]=X;
+                        Projectail[i][3]= Y;
                         Projectail[i][4]=1;
                         i=21;
                     }else{
                         if (rightF){
                             Projectail[i][1]=1;
-                            Projectail[i][2]=x1;
-                            Projectail[i][3]=y1;
+                            Projectail[i][2]=X;
+                            Projectail[i][3]= Y;
                             Projectail[i][4]=2;
                             i=21;
                         }else{
                             if (downF){
                                 Projectail[i][1]=1;
-                                Projectail[i][2]=x1;
-                                Projectail[i][3]=y1;
+                                Projectail[i][2]=X;
+                                Projectail[i][3]= Y;
                                 Projectail[i][4]=3;
                                 i=21;
                             }else{
                                 if (leftF){
                                     Projectail[i][1]=1;
-                                    Projectail[i][2]=x1;
-                                    Projectail[i][3]=y1;
+                                    Projectail[i][2]=X;
+                                    Projectail[i][3]= Y;
                                     Projectail[i][4]=4;
                                     i=21;
                                 }
@@ -202,6 +323,53 @@ public class GameFieldTank extends JPanel implements ActionListener {
                 }
             }
             fire=false;
+        }
+    }
+
+    private void User2(){
+        if((X-1 <= X2) && (X+1 >= X2) || (Y-1 <= Y2) && (Y+1 >= Y2)){
+            fire2=true;
+        }
+    }
+
+    private void Projectail2(){
+        if (fire2 && (T2==1)){
+            for(int i=1; i<20; i++){
+                if (Projectail2[i][1]==0){
+                    if (N2==1){
+                        Projectail2[i][1]=1;
+                        Projectail2[i][2]=X2;
+                        Projectail2[i][3]= Y2;
+                        Projectail2[i][4]=1;
+                        i=21;
+                    }else{
+                        if (N2==2){
+                            Projectail2[i][1]=1;
+                            Projectail2[i][2]=X2;
+                            Projectail2[i][3]= Y2;
+                            Projectail2[i][4]=2;
+                            i=21;
+                        }else{
+                            if (N2==3){
+                                Projectail2[i][1]=1;
+                                Projectail2[i][2]=X2;
+                                Projectail2[i][3]= Y2;
+                                Projectail2[i][4]=3;
+                                i=21;
+                            }else{
+                                if (N2==4){
+                                    Projectail2[i][1]=1;
+                                    Projectail2[i][2]=X2;
+                                    Projectail2[i][3]= Y2;
+                                    Projectail2[i][4]=4;
+                                    i=21;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            fire2=false;
         }
     }
 
@@ -257,6 +425,57 @@ public class GameFieldTank extends JPanel implements ActionListener {
         }
     }
 
+    private void MoveProjectail2(){
+        for(int i=1; i<21; i++){
+            if(Projectail2[i][4] == 1){
+                Projectail2[i][3]=Projectail2[i][3]-32;
+                if(Projectail2[i][3]==-32){
+                    Projectail2[i][1]=0;
+                }
+                for(int j=1; j<70; j++){
+                    if((x[j]==Projectail2[i][2]) && (y[j]==Projectail2[i][3])){
+                        Projectail2[i][1]=0;
+                    }
+                }
+            }else{
+                if(Projectail2[i][4]== 2){
+                    Projectail2[i][2]=Projectail2[i][2]+32;
+                    if(Projectail2[i][2]==672){
+                        Projectail2[i][1]=0;
+                    }
+                    for(int j=1; j<70; j++){
+                        if((x[j]==Projectail2[i][2]) && (y[j]==Projectail2[i][3])){
+                            Projectail2[i][1]=0;
+                        }
+                    }
+                }else{
+                    if(Projectail2[i][4]== 3){
+                        Projectail2[i][3]=Projectail2[i][3]+32;
+                        if(Projectail2[i][3]==672){
+                            Projectail2[i][1]=0;
+                        }
+                        for(int j=1; j<70; j++){
+                            if((x[j]==Projectail2[i][2]) && (y[j]==Projectail2[i][3])){
+                                Projectail2[i][1]=0;
+                            }
+                        }
+                    }else{
+                        if(Projectail2[i][4]== 4){
+                            Projectail2[i][2]=Projectail2[i][2]-32;
+                            if(Projectail2[i][2]==-32){
+                                Projectail2[i][1]=0;
+                            }
+                            for(int j=1; j<70; j++){
+                                if((x[j]==Projectail2[i][2]) && (y[j]==Projectail2[i][3])){
+                                    Projectail2[i][1]=0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -265,6 +484,13 @@ public class GameFieldTank extends JPanel implements ActionListener {
         move();
         Projectail();
         MoveProjectail();
+        bot2();
+        CheckColision2();
+        Rotation2();
+        move2();
+        User2();
+        Projectail2();
+        MoveProjectail2();
         repaint();
     }
 
@@ -275,10 +501,16 @@ public class GameFieldTank extends JPanel implements ActionListener {
         for(int i=1; i < 70; i++){
             g.drawImage(barikada, x[i], y[i], this);
         }
-        g.drawImage(tank, x1, y1, this);
+        g.drawImage(tank5, X, Y, this);
+        g.drawImage(tank25, X2, Y2, this);
         for(int i=1; i<20; i++){
             if(Projectail[i][1] == 1){
                 g.drawImage(bomb,Projectail[i][2],Projectail[i][3],this);
+            }
+        }
+        for(int i=1; i<20; i++){
+            if(Projectail2[i][1] == 1){
+                g.drawImage(bomb2,Projectail2[i][2],Projectail2[i][3],this);
             }
         }
     }
