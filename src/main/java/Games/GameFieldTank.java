@@ -24,7 +24,12 @@ public class GameFieldTank extends JPanel implements ActionListener {
     private boolean down = false;
     private boolean inGame1 = true;
     private boolean inGame2 = true;
-
+    private Image barikada;
+    private Image tank1;
+    private Image tank2;
+    private Image tank3;
+    private Image tank4;
+    private Image tank;
     private Timer timer;
 
 
@@ -32,11 +37,23 @@ public class GameFieldTank extends JPanel implements ActionListener {
         setBackground(Color.black);
         loadImages();
         initGame();
-
+        timer();
+        addKeyListener(new GameFieldTank.FieldKeyListener());
+        setFocusable(true);
     }
 
     private void loadImages() {
-
+        ImageIcon iib1 = new ImageIcon("resources\\tank\\barikada.png");
+        barikada = iib1.getImage();
+        ImageIcon iib2 = new ImageIcon("resources\\tank\\tank1.png");
+        tank = iib2.getImage();
+        tank1 = iib2.getImage();
+        ImageIcon iib3 = new ImageIcon("resources\\tank\\tank2.png");
+        tank2 = iib3.getImage();
+        ImageIcon iib4 = new ImageIcon("resources\\tank\\tank3.png");
+        tank3 = iib4.getImage();
+        ImageIcon iib5 = new ImageIcon("resources\\tank\\tank4.png");
+        tank4 = iib5.getImage();
     }
 
     private void initGame() {
@@ -44,15 +61,13 @@ public class GameFieldTank extends JPanel implements ActionListener {
         y1 = new Random().nextInt(20)*32;
         x2 = new Random().nextInt(20)*32;
         y2 = new Random().nextInt(20)*32;
-        for (int i = 1; i < 81; i++){
+        for (int i = 1; i < 70; i++){
             x[i] = new Random().nextInt(20)*32;
             y[i] = new Random().nextInt(20)*32;
             for (int j = 1; j < i; j++){
-                if (((x[i] <= x[j]+1) && (x[i] >= x[j]-1) && (y[i] <= y[j]+1) && (y[i] >= y[j]-1)) || (x[i] == x1) || (x[i] == x2) || (y[i] == y1) || (y[i] == y2)){
+                if (((x[i] <= x[j]+32) && (x[i] >= x[j]-32) && (y[i] <= y[j]+32) && (y[i] >= y[j]-32)) || (x[i] == x1) || (x[i] == x2) || (y[i] == y1) || (y[i] == y2)){
                     i = i-1;
                     j = 120;
-                }else{
-                    System.out.println(x[i]);
                 }
             }
         }
@@ -63,15 +78,46 @@ public class GameFieldTank extends JPanel implements ActionListener {
         timer.start();
     }
 
-    // Отрисовка объектов
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+    private void move(){
+        if (up){
+            y1 = y1-32;
+            up = false;
+            tank = tank1;
+        }else{
+            if (right){
+                x1 = x1+32;
+                right = false;
+                tank = tank2;
+            }else{
+                if (down){
+                    y1 = y1+32;
+                    down  = false;
+                    tank = tank3;
+                }else{
+                    if (left){
+                        x1 = x1-32;
+                        left = false;
+                        tank = tank4;
+                    }
+                }
+            }
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+       move();
+       repaint();
+    }
 
+    // Отрисовка объектов
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        for(int i=1; i < 70; i++){
+            g.drawImage(barikada, x[i], y[i], this);
+        }
+        g.drawImage(tank, x1, y1, this);
     }
 
     class FieldKeyListener extends KeyAdapter {
@@ -79,26 +125,18 @@ public class GameFieldTank extends JPanel implements ActionListener {
         public void keyPressed(KeyEvent e) {
             super.keyPressed(e);
             int key = e.getKeyCode();
-            if(key == KeyEvent.VK_LEFT && !right){
+            if(key == KeyEvent.VK_LEFT){
                 left = true;
-                up = false;
-                down = false;
             }
-            if(key == KeyEvent.VK_RIGHT && !left){
+            if(key == KeyEvent.VK_RIGHT){
                 right = true;
-                up = false;
-                down = false;
             }
 
-            if(key == KeyEvent.VK_UP && !down){
-                right = false;
+            if(key == KeyEvent.VK_UP){
                 up = true;
-                left = false;
             }
-            if(key == KeyEvent.VK_DOWN && !up){
-                right = false;
+            if(key == KeyEvent.VK_DOWN){
                 down = true;
-                left = false;
             }
         }
     }
