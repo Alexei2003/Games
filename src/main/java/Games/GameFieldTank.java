@@ -12,7 +12,7 @@ public class GameFieldTank extends JPanel implements ActionListener {
     private final int SIZE = 640;
     private final int DOT_SIZE = 32;
     private final int ALL_DOTS = 400;
-    private int bots=2;
+    private int bots=3;
     private int[] x = new int[ALL_DOTS];
     private int[] y = new int[ALL_DOTS];
     private int[] [] Massive = new int[bots+1][6];
@@ -192,17 +192,17 @@ public class GameFieldTank extends JPanel implements ActionListener {
                 }
             }
         }else{
-            if(i==2){
-                if ((Massive[2][4]==1) && (T2==2)){
+            if(i!=1){
+                if ((Massive[i][4]==1) && (T2==2)){
                     tank25 = tank21;
                 }else{
-                    if ((Massive[2][4]==2) && (T2==2)){
+                    if ((Massive[i][4]==2) && (T2==2)){
                         tank25 = tank22;
                     }else{
-                        if ((Massive[2][4]==3) && (T2==2)){
+                        if ((Massive[i][4]==3) && (T2==2)){
                             tank25 = tank23;
                         }else{
-                            if ((Massive[2][4]==4) && (T2==2)){
+                            if ((Massive[i][4]==4) && (T2==2)){
                                 tank25 = tank24;
                             }
                         }
@@ -354,17 +354,19 @@ public class GameFieldTank extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for(int bots=1; bots<3; bots++){
-            if(bots==1){
+        for(int i=1; i<bots+1; i++){
+            if(i==1){
                 for(int j=1; j<3; j++) {
                     Gamer();
-                    Tank(bots);
+                    Tank(i);
                 }
             }else{
-                bot(bots);
-                Tank(bots);
+                for(int j=1; j<3; j++) {
+                    bot(i);
+                    Tank(i);
+                }
             }
-            BOTS(bots);
+            BOTS(i);
         }
         repaint();
     }
@@ -387,7 +389,10 @@ public class GameFieldTank extends JPanel implements ActionListener {
             }
         }
         g.drawImage(tank5, Massive[1][2], Massive[1][3], this);
-        g.drawImage(tank25, Massive[2][2], Massive[2][3], this);
+        for (int j=2; j<bots+1; j++){
+            g.drawImage(tank25, Massive[j][2], Massive[j][3], this);
+
+        }
     }
 
     class FieldKeyListener extends KeyAdapter {
