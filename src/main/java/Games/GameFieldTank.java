@@ -14,14 +14,9 @@ public class GameFieldTank extends JPanel implements ActionListener {
     private final int ALL_DOTS = 400;
     private int[] x = new int[ALL_DOTS];
     private int[] y = new int[ALL_DOTS];
-    private int[] [] Projectail = new int[21][5];
-    private int[] [] Projectail2 = new int[21][5];
-    private int X;
-    private int Y;
+    private int[] [] Massive = new int[3][6];
+    private int[] [] [] Projectail = new int[3][21][5];
     private int N;
-    private int X2;
-    private int Y2;
-    private int N2;
     private int T2;
     private int Temp1;
     private int Temp2;
@@ -38,7 +33,6 @@ public class GameFieldTank extends JPanel implements ActionListener {
     private boolean right2 = false;
     private boolean up2 = false;
     private boolean down2 = false;
-    private boolean fire2 = false;
     private Image barikada;
     private Image tank1;
     private Image tank2;
@@ -93,31 +87,27 @@ public class GameFieldTank extends JPanel implements ActionListener {
     }
 
     private void initGame() {
-        X = rand.nextInt(20)*32;
-        Y = rand.nextInt(20)*32;
-        X2 = rand.nextInt(20)*32;
-        Y2 = rand.nextInt(20)*32;
+        Massive[1][2] = rand.nextInt(20)*32;
+        Massive[1][3] = rand.nextInt(20)*32;
+        Massive[2][2] = rand.nextInt(20)*32;
+        Massive[2][3] = rand.nextInt(20)*32;
         for (int i = 1; i < 70; i++){
             x[i] = rand.nextInt(20)*32;
             y[i] = rand.nextInt(20)*32;
             for (int j = 1; j < i; j++){
-                if (((x[i] <= x[j]+32) && (x[i] >= x[j]-32) && (y[i] <= y[j]+32) && (y[i] >= y[j]-32)) || (x[i] == X) || (y[i] == Y)){
+                if (((x[i] <= x[j]+32) && (x[i] >= x[j]-32) && (y[i] <= y[j]+32) && (y[i] >= y[j]-32)) || (x[i] == Massive[1][2]) || (y[i] == Massive[1][3])){
                     i = i-1;
                     j = 120;
                 }
             }
         }
-        for(int i = 1; i<20; i++){
-            Projectail[i][1] = 0;
-            Projectail[i][2] = - 32;
-            Projectail[i][3] = - 32;
-            Projectail[i][4] = 0;
-        }
-        for(int i = 1; i<20; i++){
-            Projectail2[i][1] = 0;
-            Projectail2[i][2] = - 32;
-            Projectail2[i][3] = - 32;
-            Projectail2[i][4] = 0;
+        for(int j=1; j<3; j++){
+            for(int i = 1; i<20; i++){
+                Projectail[j][i][1] = 0;
+                Projectail[j][i][2] = - 32;
+                Projectail[j][i][3] = - 32;
+                Projectail[j][i][4] = 0;
+            }
         }
         T2=1;
     }
@@ -127,23 +117,23 @@ public class GameFieldTank extends JPanel implements ActionListener {
         timer.start();
     }
 
-    private  void bot2(){
+    private  void bot(int i){
         if(T2==1){
             N=rand.nextInt(2);
-            if((X-X2>0)){
+            if((Massive[1][2]-Massive[i][2]>0)){
                 Temp1=2;
             }else{
                 Temp1=4;
             }
-            if((Y-Y2>0)){
+            if((Massive[1][3]-Massive[i][3]>0)){
                 Temp2=3;
             }else{
                 Temp2=1;
             }
             if(N==1){
-                N2=Temp1;
+                Massive[i][4]=Temp1;
             }else{
-                N2=Temp2;
+                Massive[i][4]=Temp2;
             }
             T2=2;
         }else{
@@ -151,323 +141,206 @@ public class GameFieldTank extends JPanel implements ActionListener {
         }
     }
 
-    private void Rotation(){
-        if (upF){
-            tank5 = tank1;
-        }else{
-            if (rightF){
-                tank5 = tank2;
+    private void user2(int i){
+        if((Massive[1][2]-32 <= Massive[i][2]) && (Massive[1][2]+32 >= Massive[i][2]) || (Massive[1][3]-32 <= Massive[i][3]) && (Massive[1][3]+32 >= Massive[i][3])){
+            Massive[i][5]=1;
+        }
+    }
+
+    private void Gamer(){
+        if(T2==1){
+            if(up){
+                Massive[1][4]=1;
+                up=false;
             }else{
-                if (downF){
-                    tank5 = tank3;
+                if(right){
+                    Massive[1][4]=2;
+                    right=false;
                 }else{
-                    if (leftF){
-                        tank5 = tank4;
-                    }
-                }
-            }
-        }
-    }
-
-    private void Rotation2(){
-        if (N2==1){
-            tank25 = tank21;
-        }else{
-            if (N2==2){
-                tank25 = tank22;
-            }else{
-                if (N2==3){
-                    tank25 = tank23;
-                }else{
-                    if (N2==4){
-                        tank25 = tank24;
-                    }
-                }
-            }
-        }
-    }
-
-    private void move(){
-        if (up){
-            Y = Y -32;
-            up = false;
-        }else{
-            if (right){
-                X = X+32;
-                right = false;
-            }else{
-                if (down){
-                    Y = Y +32;
-                    down  = false;
-                }else{
-                    if (left){
-                        X = X-32;
-                        left = false;
-                    }
-                }
-            }
-        }
-    }
-
-    private void move2(){
-        if ((N2==1) && (T2==1)){
-            Y2 = Y2 -32;
-        }else{
-            if ((N2==2) && (T2==1)){
-                X2 = X2+32;
-            }else{
-                if ((N2==3) && (T2==1)){
-                    Y2 = Y2 +32;
-                }else{
-                    if ((N2==4) && (T2==1)){
-                        X2 = X2-32;
-                    }
-                }
-            }
-        }
-    }
-
-    private void CheckColision(){
-        for(int i=1; i<70; i++){
-            if ((X+32 == x[i]) && (Y == y[i]) && (right)){
-                right = false;
-            }
-            if ((X-32 == x[i]) && (Y == y[i]) && (left)){
-                left = false;
-            }
-            if ((Y +32 == y[i]) && (X == x[i]) && (down)){
-                down = false;
-            }
-            if ((Y -32 == y[i]) && (X == x[i]) && (up)){
-                up = false;
-            }
-        }
-        if ((X+32 == 640)&& (right)){
-            right = false;
-        }
-        if ((X-32 == 0) && (left)){
-            left = false;
-        }
-        if ((Y +32 == 640) && (down)){
-            down = false;
-        }
-        if ((Y -32 == 0) && (up)){
-            up = false;
-        }
-    }
-
-    private void CheckColision2(){
-        for(int i=1; i<70; i++){
-            if ((X2+32 == x[i]) && (Y2 == y[i]) && (N2==2)){
-                N2=0;
-            }
-            if ((X2-32 == x[i]) && (Y2 == y[i]) && (N2==4)){
-                N2=0;
-            }
-            if ((Y2 +32 == y[i]) && (X2 == x[i]) && (N2==3)){
-                N2=0;
-            }
-            if ((Y2 -32 == y[i]) && (X2 == x[i]) && (N2==1)){
-                N2=0;
-            }
-        }
-        if ((X2+32 == 640)&& (N2==2)){
-            N2=0;
-        }
-        if ((X2-32 == 0) && (N2==4)){
-            N2=0;
-        }
-        if ((Y2+32 == 640) && (N2==3)){
-            N2=0;
-        }
-        if ((Y2-32 == 0) && (N2==1)){
-            N2=0;
-        }
-    }
-
-    private void Projectail(){
-        if (fire){
-            for(int i=1; i<20; i++){
-                if (Projectail[i][1]==0){
-                    if (upF){
-                        Projectail[i][1]=1;
-                        Projectail[i][2]=X;
-                        Projectail[i][3]= Y;
-                        Projectail[i][4]=1;
-                        i=21;
+                    if(down){
+                        Massive[1][4]=3;
+                        down=false;
                     }else{
-                        if (rightF){
-                            Projectail[i][1]=1;
-                            Projectail[i][2]=X;
-                            Projectail[i][3]= Y;
-                            Projectail[i][4]=2;
-                            i=21;
+                        if(left){
+                            Massive[1][4]=4;
+                            left=false;
+                        }
+                    }
+                }
+            }
+            T2=2;
+        }else{
+            T2=1;
+        }
+    }
+
+    private void Tank(int i){
+        if (i==1){
+            if ((Massive[1][4]==1) && (T2==2)){
+                tank5 = tank1;
+            }else{
+                if ((Massive[1][4]==2) && (T2==2)){
+                    tank5 = tank2;
+                }else{
+                    if ((Massive[1][4]==3) && (T2==2)){
+                        tank5 = tank3;
+                    }else{
+                        if ((Massive[1][4]==4) && (T2==2)){
+                            tank5 = tank4;
+                        }
+                    }
+                }
+            }
+        }else{
+            if(i==2){
+                if ((Massive[2][4]==1) && (T2==2)){
+                    tank25 = tank21;
+                }else{
+                    if ((Massive[2][4]==2) && (T2==2)){
+                        tank25 = tank22;
+                    }else{
+                        if ((Massive[2][4]==3) && (T2==2)){
+                            tank25 = tank23;
                         }else{
-                            if (downF){
-                                Projectail[i][1]=1;
-                                Projectail[i][2]=X;
-                                Projectail[i][3]= Y;
-                                Projectail[i][4]=3;
-                                i=21;
-                            }else{
-                                if (leftF){
-                                    Projectail[i][1]=1;
-                                    Projectail[i][2]=X;
-                                    Projectail[i][3]= Y;
-                                    Projectail[i][4]=4;
-                                    i=21;
-                                }
+                            if ((Massive[2][4]==4) && (T2==2)){
+                                tank25 = tank24;
                             }
                         }
                     }
                 }
             }
-            fire=false;
         }
     }
 
-    private void User2(){
-        if((X-1 <= X2) && (X+1 >= X2) || (Y-1 <= Y2) && (Y+1 >= Y2)){
-            fire2=true;
+    private void BOTS(int i){
+        for(int j=1; j<70; j++){
+            if ((Massive[i][2]+32 == x[j]) && (Massive[i][3] == y[j]) && (Massive[i][4]==2)){
+                Massive[i][4]=0;
+            }
+            if ((Massive[i][2]-32 == x[j]) && (Massive[i][3] == y[j]) && (Massive[i][4]==4)){
+                Massive[i][4]=0;
+            }
+            if ((Massive[i][3] +32 == y[j]) && (Massive[i][2] == x[j]) && (Massive[i][4]==3)){
+                Massive[i][4]=0;
+            }
+            if ((Massive[i][3] -32 == y[j]) && (Massive[i][2] == x[j]) && (Massive[i][4]==1)){
+                Massive[i][4]=0;
+            }
         }
-    }
 
-    private void Projectail2(){
-        if (fire2 && (T2==1)){
-            for(int i=1; i<20; i++){
-                if (Projectail2[i][1]==0){
-                    if (N2==1){
-                        Projectail2[i][1]=1;
-                        Projectail2[i][2]=X2;
-                        Projectail2[i][3]= Y2;
-                        Projectail2[i][4]=1;
-                        i=21;
+        if ((Massive[i][2]+32 == 640)&& (Massive[i][4]==2)){
+            Massive[i][4]=0;
+        }
+        if ((Massive[i][2]-32 == 0) && (Massive[i][4]==4)){
+            Massive[i][4]=0;
+        }
+        if ((Massive[i][3]+32 == 640) && (Massive[i][4]==3)){
+            Massive[i][4]=0;
+        }
+        if ((Massive[i][3]-32 == 0) && (Massive[i][4]==1)){
+            Massive[i][4]=0;
+        }
+
+        if ((Massive[i][4]==1) && (T2==1)){
+            Massive[i][3] = Massive[i][3] -32;
+        }else{
+            if ((Massive[i][4]==2) && (T2==1)){
+                Massive[i][2] = Massive[i][2]+32;
+            }else{
+                if ((Massive[i][4]==3) && (T2==1)){
+                    Massive[i][3] = Massive[i][3] +32;
+                }else{
+                    if ((Massive[i][4]==4) && (T2==1)){
+                        Massive[i][2] = Massive[i][2]-32;
+                    }
+                }
+            }
+        }
+
+        if ((Massive[i][5]==1) && (T2==1)){
+            for(int j=1; j<20; j++){
+                if (Projectail[i][j][1]==0){
+                    if (Massive[i][4]==1){
+                        Projectail[i][j][1]=1;
+                        Projectail[i][j][2]=Massive[i][2];
+                        Projectail[i][j][3]=Massive[i][3];
+                        Projectail[i][j][4]=1;
+                        j=21;
                     }else{
-                        if (N2==2){
-                            Projectail2[i][1]=1;
-                            Projectail2[i][2]=X2;
-                            Projectail2[i][3]= Y2;
-                            Projectail2[i][4]=2;
-                            i=21;
+                        if (Massive[i][4]==2){
+                            Projectail[i][j][1]=1;
+                            Projectail[i][j][2]=Massive[i][2];
+                            Projectail[i][j][3]=Massive[i][3];
+                            Projectail[i][j][4]=2;
+                            j=21;
                         }else{
-                            if (N2==3){
-                                Projectail2[i][1]=1;
-                                Projectail2[i][2]=X2;
-                                Projectail2[i][3]= Y2;
-                                Projectail2[i][4]=3;
-                                i=21;
+                            if (Massive[i][4]==3){
+                                Projectail[i][j][1]=1;
+                                Projectail[i][j][2]=Massive[i][2];
+                                Projectail[i][j][3]=Massive[i][3];
+                                Projectail[i][j][4]=3;
+                                j=21;
                             }else{
-                                if (N2==4){
-                                    Projectail2[i][1]=1;
-                                    Projectail2[i][2]=X2;
-                                    Projectail2[i][3]= Y2;
-                                    Projectail2[i][4]=4;
-                                    i=21;
+                                if (Massive[i][4]==4){
+                                    Projectail[i][j][1]=1;
+                                    Projectail[i][j][2]=Massive[i][2];
+                                    Projectail[i][j][3]=Massive[i][3];
+                                    Projectail[i][j][4]=4;
+                                    j=21;
                                 }
                             }
                         }
                     }
                 }
             }
-            fire2=false;
+            Massive[i][5]=0;
         }
-    }
 
-    private void MoveProjectail(){
-        for(int i=1; i<21; i++){
-            if(Projectail[i][4]== 1){
-                Projectail[i][3]=Projectail[i][3]-32;
-                if(Projectail[i][3]==-32){
-                    Projectail[i][1]=0;
+        if(T2==1){
+            Massive[i][4]=0;
+        }
+        for(int j=1; j<21; j++){
+            if(Projectail[i][j][4] == 1){
+                Projectail[i][j][3]=Projectail[i][j][3]-32;
+                if(Projectail[i][j][3]==-32){
+                    Projectail[i][j][1]=0;
                 }
-                for(int j=1; j<70; j++){
-                    if((x[j]==Projectail[i][2]) && (y[j]==Projectail[i][3])){
-                        Projectail[i][1]=0;
+                for(int k=1; k<70; k++){
+                    if((x[k]==Projectail[i][j][2]) && (y[k]==Projectail[i][j][3])){
+                        Projectail[i][j][1]=0;
                     }
                 }
             }else{
-                if(Projectail[i][4]== 2){
-                    Projectail[i][2]=Projectail[i][2]+32;
-                    if(Projectail[i][2]==672){
-                        Projectail[i][1]=0;
+                if(Projectail[i][j][4]== 2){
+                    Projectail[i][j][2]=Projectail[i][j][2]+32;
+                    if(Projectail[i][j][2]==672){
+                        Projectail[i][j][1]=0;
                     }
-                    for(int j=1; j<70; j++){
-                        if((x[j]==Projectail[i][2]) && (y[j]==Projectail[i][3])){
-                            Projectail[i][1]=0;
-                        }
-                    }
-                }else{
-                    if(Projectail[i][4]== 3){
-                        Projectail[i][3]=Projectail[i][3]+32;
-                        if(Projectail[i][3]==672){
-                            Projectail[i][1]=0;
-                        }
-                        for(int j=1; j<70; j++){
-                            if((x[j]==Projectail[i][2]) && (y[j]==Projectail[i][3])){
-                                Projectail[i][1]=0;
-                            }
-                        }
-                    }else{
-                        if(Projectail[i][4]== 4){
-                            Projectail[i][2]=Projectail[i][2]-32;
-                            if(Projectail[i][2]==-32){
-                                Projectail[i][1]=0;
-                            }
-                            for(int j=1; j<70; j++){
-                                if((x[j]==Projectail[i][2]) && (y[j]==Projectail[i][3])){
-                                    Projectail[i][1]=0;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void MoveProjectail2(){
-        for(int i=1; i<21; i++){
-            if(Projectail2[i][4] == 1){
-                Projectail2[i][3]=Projectail2[i][3]-32;
-                if(Projectail2[i][3]==-32){
-                    Projectail2[i][1]=0;
-                }
-                for(int j=1; j<70; j++){
-                    if((x[j]==Projectail2[i][2]) && (y[j]==Projectail2[i][3])){
-                        Projectail2[i][1]=0;
-                    }
-                }
-            }else{
-                if(Projectail2[i][4]== 2){
-                    Projectail2[i][2]=Projectail2[i][2]+32;
-                    if(Projectail2[i][2]==672){
-                        Projectail2[i][1]=0;
-                    }
-                    for(int j=1; j<70; j++){
-                        if((x[j]==Projectail2[i][2]) && (y[j]==Projectail2[i][3])){
-                            Projectail2[i][1]=0;
+                    for(int k=1; k<70; k++){
+                        if((x[k]==Projectail[i][j][2]) && (y[k]==Projectail[i][j][3])){
+                            Projectail[i][j][1]=0;
                         }
                     }
                 }else{
-                    if(Projectail2[i][4]== 3){
-                        Projectail2[i][3]=Projectail2[i][3]+32;
-                        if(Projectail2[i][3]==672){
-                            Projectail2[i][1]=0;
+                    if(Projectail[i][j][4]== 3){
+                        Projectail[i][j][3]=Projectail[i][j][3]+32;
+                        if(Projectail[i][j][3]==672){
+                            Projectail[i][j][1]=0;
                         }
-                        for(int j=1; j<70; j++){
-                            if((x[j]==Projectail2[i][2]) && (y[j]==Projectail2[i][3])){
-                                Projectail2[i][1]=0;
+                        for(int k=1; k<70; k++){
+                            if((x[k]==Projectail[i][j][2]) && (y[k]==Projectail[i][j][3])){
+                                Projectail[i][j][1]=0;
                             }
                         }
                     }else{
-                        if(Projectail2[i][4]== 4){
-                            Projectail2[i][2]=Projectail2[i][2]-32;
-                            if(Projectail2[i][2]==-32){
-                                Projectail2[i][1]=0;
+                        if(Projectail[i][j][4]== 4){
+                            Projectail[i][j][2]=Projectail[i][j][2]-32;
+                            if(Projectail[i][j][2]==-32){
+                                Projectail[i][j][1]=0;
                             }
-                            for(int j=1; j<70; j++){
-                                if((x[j]==Projectail2[i][2]) && (y[j]==Projectail2[i][3])){
-                                    Projectail2[i][1]=0;
+                            for(int k=1; k<70; k++){
+                                if((x[k]==Projectail[i][j][2]) && (y[k]==Projectail[i][j][3])){
+                                    Projectail[i][j][1]=0;
                                 }
                             }
                         }
@@ -479,18 +352,19 @@ public class GameFieldTank extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        CheckColision();
-        Rotation();
-        move();
-        Projectail();
-        MoveProjectail();
-        bot2();
-        CheckColision2();
-        Rotation2();
-        move2();
-        User2();
-        Projectail2();
-        MoveProjectail2();
+        for(int i=1; i<3; i++){
+            if(i==1){
+                for(int j=1; j<3; j++) {
+                    Gamer();
+                    Tank(i);
+                }
+            }else{
+                bot(i);
+                user2(i);
+                Tank(i);
+            }
+            BOTS(i);
+        }
         repaint();
     }
 
@@ -501,18 +375,18 @@ public class GameFieldTank extends JPanel implements ActionListener {
         for(int i=1; i < 70; i++){
             g.drawImage(barikada, x[i], y[i], this);
         }
-        g.drawImage(tank5, X, Y, this);
-        g.drawImage(tank25, X2, Y2, this);
-        for(int i=1; i<20; i++){
-            if(Projectail[i][1] == 1){
-                g.drawImage(bomb,Projectail[i][2],Projectail[i][3],this);
+        for(int j=1; j<20; j++){
+            if(Projectail[1][j][1] == 1){
+                g.drawImage(bomb,Projectail[1][j][2],Projectail[1][j][3],this);
             }
         }
-        for(int i=1; i<20; i++){
-            if(Projectail2[i][1] == 1){
-                g.drawImage(bomb2,Projectail2[i][2],Projectail2[i][3],this);
+        for(int j=1; j<20; j++){
+            if(Projectail[2][j][1] == 1){
+                g.drawImage(bomb2,Projectail[2][j][2],Projectail[2][j][3],this);
             }
         }
+        g.drawImage(tank5, Massive[1][2], Massive[1][3], this);
+        g.drawImage(tank25, Massive[2][2], Massive[2][3], this);
     }
 
     class FieldKeyListener extends KeyAdapter {
@@ -521,18 +395,14 @@ public class GameFieldTank extends JPanel implements ActionListener {
             super.keyPressed(e);
             int key = e.getKeyCode();
             if(key == KeyEvent.VK_LEFT){
-                if(leftF){
-                    left = true;
-                }
+                left = true;
                 leftF = true;
                 rightF = false;
                 upF = false;
                 downF = false;
             }
             if(key == KeyEvent.VK_RIGHT){
-                if(rightF){
-                    right = true;
-                }
+                right = true;
                 rightF = true;
                 leftF = false;
                 upF = false;
@@ -540,18 +410,14 @@ public class GameFieldTank extends JPanel implements ActionListener {
             }
 
             if(key == KeyEvent.VK_UP){
-                if(upF){
-                    up = true;
-                }
+                up = true;
                 upF = true;
                 leftF = false;
                 rightF = false;
                 downF = false;
             }
             if(key == KeyEvent.VK_DOWN){
-                if(downF){
-                    down = true;
-                }
+                down = true;
                 downF = true;
                 leftF = false;
                 rightF = false;
