@@ -12,10 +12,11 @@ public class GameFieldTank extends JPanel implements ActionListener {
     private final int SIZE = 640;
     private final int DOT_SIZE = 32;
     private final int ALL_DOTS = 400;
+    private int bots=2;
     private int[] x = new int[ALL_DOTS];
     private int[] y = new int[ALL_DOTS];
-    private int[] [] Massive = new int[3][6];
-    private int[] [] [] Projectail = new int[3][21][5];
+    private int[] [] Massive = new int[bots+1][6];
+    private int[] [] [] Projectail = new int[bots+1][21][5];
     private int N;
     private int T2;
     private int Temp1;
@@ -24,15 +25,8 @@ public class GameFieldTank extends JPanel implements ActionListener {
     private boolean right = false;
     private boolean up = false;
     private boolean down = false;
-    private boolean leftF = false;
-    private boolean rightF = false;
-    private boolean upF = false;
-    private boolean downF = false;
     private boolean fire = false;
-    private boolean left2 = false;
-    private boolean right2 = false;
-    private boolean up2 = false;
-    private boolean down2 = false;
+    private boolean run = false;
     private Image barikada;
     private Image tank1;
     private Image tank2;
@@ -135,15 +129,13 @@ public class GameFieldTank extends JPanel implements ActionListener {
             }else{
                 Massive[i][4]=Temp2;
             }
+            if((Massive[1][2]-32 <= Massive[i][2]) && (Massive[1][2]+32 >= Massive[i][2]) || (Massive[1][3]-32 <= Massive[i][3]) && (Massive[1][3]+32 >= Massive[i][3])){
+                Massive[i][5]=1;
+            }
             T2=2;
         }else{
             T2=1;
-        }
-    }
-
-    private void user2(int i){
-        if((Massive[1][2]-32 <= Massive[i][2]) && (Massive[1][2]+32 >= Massive[i][2]) || (Massive[1][3]-32 <= Massive[i][3]) && (Massive[1][3]+32 >= Massive[i][3])){
-            Massive[i][5]=1;
+            run=true;
         }
     }
 
@@ -152,18 +144,22 @@ public class GameFieldTank extends JPanel implements ActionListener {
             if(up){
                 Massive[1][4]=1;
                 up=false;
+                run=true;
             }else{
                 if(right){
                     Massive[1][4]=2;
                     right=false;
+                    run=true;
                 }else{
                     if(down){
                         Massive[1][4]=3;
                         down=false;
+                        run=true;
                     }else{
                         if(left){
                             Massive[1][4]=4;
                             left=false;
+                             run=true;
                         }
                     }
                 }
@@ -171,6 +167,10 @@ public class GameFieldTank extends JPanel implements ActionListener {
             T2=2;
         }else{
             T2=1;
+        }
+        if(fire){
+            Massive[1][5]=1;
+            fire=false;
         }
     }
 
@@ -241,20 +241,25 @@ public class GameFieldTank extends JPanel implements ActionListener {
             Massive[i][4]=0;
         }
 
-        if ((Massive[i][4]==1) && (T2==1)){
-            Massive[i][3] = Massive[i][3] -32;
-        }else{
-            if ((Massive[i][4]==2) && (T2==1)){
-                Massive[i][2] = Massive[i][2]+32;
-            }else{
-                if ((Massive[i][4]==3) && (T2==1)){
-                    Massive[i][3] = Massive[i][3] +32;
-                }else{
-                    if ((Massive[i][4]==4) && (T2==1)){
-                        Massive[i][2] = Massive[i][2]-32;
+        if(run) {
+            if ((Massive[i][4] == 1) && (T2 == 1)) {
+                Massive[i][3] = Massive[i][3] - 32;
+            } else {
+                if ((Massive[i][4] == 2) && (T2 == 1)) {
+                    Massive[i][2] = Massive[i][2] + 32;
+                } else {
+                    if ((Massive[i][4] == 3) && (T2 == 1)) {
+                        Massive[i][3] = Massive[i][3] + 32;
+                    } else {
+                        if ((Massive[i][4] == 4) && (T2 == 1)) {
+                            Massive[i][2] = Massive[i][2] - 32;
+                        }
                     }
                 }
             }
+        }
+        if(T2==1) {
+            run = false;
         }
 
         if ((Massive[i][5]==1) && (T2==1)){
@@ -296,11 +301,8 @@ public class GameFieldTank extends JPanel implements ActionListener {
             Massive[i][5]=0;
         }
 
-        if(T2==1){
-            Massive[i][4]=0;
-        }
         for(int j=1; j<21; j++){
-            if(Projectail[i][j][4] == 1){
+            if((Projectail[i][j][4] == 1) &&(T2==1)){
                 Projectail[i][j][3]=Projectail[i][j][3]-32;
                 if(Projectail[i][j][3]==-32){
                     Projectail[i][j][1]=0;
@@ -352,18 +354,17 @@ public class GameFieldTank extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        for(int i=1; i<3; i++){
-            if(i==1){
+        for(int bots=1; bots<3; bots++){
+            if(bots==1){
                 for(int j=1; j<3; j++) {
                     Gamer();
-                    Tank(i);
+                    Tank(bots);
                 }
             }else{
-                bot(i);
-                user2(i);
-                Tank(i);
+                bot(bots);
+                Tank(bots);
             }
-            BOTS(i);
+            BOTS(bots);
         }
         repaint();
     }
@@ -396,32 +397,16 @@ public class GameFieldTank extends JPanel implements ActionListener {
             int key = e.getKeyCode();
             if(key == KeyEvent.VK_LEFT){
                 left = true;
-                leftF = true;
-                rightF = false;
-                upF = false;
-                downF = false;
             }
             if(key == KeyEvent.VK_RIGHT){
                 right = true;
-                rightF = true;
-                leftF = false;
-                upF = false;
-                downF = false;
             }
 
             if(key == KeyEvent.VK_UP){
                 up = true;
-                upF = true;
-                leftF = false;
-                rightF = false;
-                downF = false;
             }
             if(key == KeyEvent.VK_DOWN){
                 down = true;
-                downF = true;
-                leftF = false;
-                rightF = false;
-                upF = false;
             }
             if(key == KeyEvent.VK_SPACE){
                 fire = true;
