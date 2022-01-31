@@ -7,6 +7,8 @@
     <list default="true" id="c293d9d3-3400-4d0a-89c3-7767e1c0a511" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Games/GameFieldTank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/GameFieldTank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Games/GameFieldZmeika.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/GameFieldZmeika.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Games/logic" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Games/logic" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +64,7 @@
       <recent name="D:\Git\Games\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Start">
+  <component name="RunManager" selected="Maven.Build">
     <configuration name="Start" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Games.MainWindow" />
       <module name="java" />

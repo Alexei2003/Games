@@ -182,8 +182,8 @@ public class GameFieldZmeika extends JPanel implements ActionListener {
                 g.drawImage(dot, x[i], y[i], this);
             }
         } else {
-            String str = "Game Over";
-            g.setColor(Color.white);
+            String str = "YOU DIED";
+            g.setColor(Color.red);
             g.drawString(str, 50, SIZE / 2);
         }
     }
