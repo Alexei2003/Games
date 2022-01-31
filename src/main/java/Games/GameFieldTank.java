@@ -82,7 +82,7 @@ public class GameFieldTank extends JPanel implements ActionListener {
         exposion = iib12.getImage();
     }
 
-    private void initGame() {
+   private void initGame() {
         Massive[1][2] = rand.nextInt(20)*32;
         Massive[1][3] = rand.nextInt(20)*32;
         Massive[2][2] = rand.nextInt(20)*32;
@@ -157,35 +157,30 @@ public class GameFieldTank extends JPanel implements ActionListener {
     private void Gamer() {
         if (up) {
             if (Massive[1][4] == 1) {
-                Massive[1][6]=1;
+                Massive[1][6] = 1;
             }
             Massive[1][4] = 1;
             up = false;
-        } else {
-            if (right) {
-                if (Massive[1][4] == 2) {
-                    Massive[1][6]=1;
-                }
-                Massive[1][4] = 2;
-                right = false;
-            } else {
-                if (down) {
-                    if (Massive[1][4] == 3) {
-                        Massive[1][6]=1;
-                    }
-                    Massive[1][4] = 3;
-                    down = false;
-                } else {
-                    if (left) {
-                        if (Massive[1][4] == 4) {
-                            Massive[1][6]=1;
-                        }
-                        Massive[1][4] = 4;
-                        left = false;
-                    }
-                }
+        } else if (right) {
+            if (Massive[1][4] == 2) {
+                Massive[1][6] = 1;
             }
+            Massive[1][4] = 2;
+            right = false;
+        } else if (down) {
+            if (Massive[1][4] == 3) {
+                Massive[1][6] = 1;
+            }
+            Massive[1][4] = 3;
+            down = false;
+        } else if (left) {
+            if (Massive[1][4] == 4) {
+                Massive[1][6] = 1;
+            }
+            Massive[1][4] = 4;
+            left = false;
         }
+
         if (fire) {
             Massive[1][5] = 1;
             fire = false;
@@ -244,18 +239,12 @@ public class GameFieldTank extends JPanel implements ActionListener {
         if (Massive[i][6] == 1) {
             if (Massive[i][4] == 1) {
                 Massive[i][3] = Massive[i][3] - 32;
-            } else {
-                if (Massive[i][4] == 2) {
-                    Massive[i][2] = Massive[i][2] + 32;
-                } else {
-                    if (Massive[i][4] == 3) {
-                        Massive[i][3] = Massive[i][3] + 32;
-                    } else {
-                        if (Massive[i][4] == 4) {
+            } else if (Massive[i][4] == 2) {
+                Massive[i][2] = Massive[i][2] + 32;
+            } else if (Massive[i][4] == 3) {
+                Massive[i][3] = Massive[i][3] + 32;
+            } else if (Massive[i][4] == 4) {
                             Massive[i][2] = Massive[i][2] - 32;
-                        }
-                    }
-                }
             }
         }
         Massive[i][6] = 0;
@@ -286,40 +275,34 @@ public class GameFieldTank extends JPanel implements ActionListener {
                         Projectail[i][j][1] = 0;
                     }
                 }
-            } else {
-                if (Projectail[i][j][4] == 2) {
-                    Projectail[i][j][2] = Projectail[i][j][2] + 32;
-                    if (Projectail[i][j][2] == 672) {
+            } else if (Projectail[i][j][4] == 2) {
+                Projectail[i][j][2] = Projectail[i][j][2] + 32;
+                if (Projectail[i][j][2] == 672) {
+                    Projectail[i][j][1] = 0;
+                }
+                for (int k = 1; k < 70; k++) {
+                    if ((x[k] == Projectail[i][j][2]) && (y[k] == Projectail[i][j][3])) {
                         Projectail[i][j][1] = 0;
                     }
-                    for (int k = 1; k < 70; k++) {
-                        if ((x[k] == Projectail[i][j][2]) && (y[k] == Projectail[i][j][3])) {
-                            Projectail[i][j][1] = 0;
-                        }
+                }
+            } else if (Projectail[i][j][4] == 3) {
+                Projectail[i][j][3] = Projectail[i][j][3] + 32;
+                if (Projectail[i][j][3] == 672) {
+                    Projectail[i][j][1] = 0;
+                }
+                for (int k = 1; k < 70; k++) {
+                    if ((x[k] == Projectail[i][j][2]) && (y[k] == Projectail[i][j][3])) {
+                        Projectail[i][j][1] = 0;
                     }
-                } else {
-                    if (Projectail[i][j][4] == 3) {
-                        Projectail[i][j][3] = Projectail[i][j][3] + 32;
-                        if (Projectail[i][j][3] == 672) {
-                            Projectail[i][j][1] = 0;
-                        }
-                        for (int k = 1; k < 70; k++) {
-                            if ((x[k] == Projectail[i][j][2]) && (y[k] == Projectail[i][j][3])) {
-                                Projectail[i][j][1] = 0;
-                            }
-                        }
-                    } else {
-                        if (Projectail[i][j][4] == 4) {
-                            Projectail[i][j][2] = Projectail[i][j][2] - 32;
-                            if (Projectail[i][j][2] == -32) {
-                                Projectail[i][j][1] = 0;
-                            }
-                            for (int k = 1; k < 70; k++) {
-                                if ((x[k] == Projectail[i][j][2]) && (y[k] == Projectail[i][j][3])) {
-                                    Projectail[i][j][1] = 0;
-                                }
-                            }
-                        }
+                }
+            } else if (Projectail[i][j][4] == 4) {
+                Projectail[i][j][2] = Projectail[i][j][2] - 32;
+                if (Projectail[i][j][2] == -32) {
+                    Projectail[i][j][1] = 0;
+                }
+                for (int k = 1; k < 70; k++) {
+                    if ((x[k] == Projectail[i][j][2]) && (y[k] == Projectail[i][j][3])) {
+                        Projectail[i][j][1] = 0;
                     }
                 }
             }
