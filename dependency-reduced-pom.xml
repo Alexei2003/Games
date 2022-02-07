@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>zmeika</groupId>
   <artifactId>java</artifactId>
-  <name>Games</name>
+  <name>games</name>
   <version>1.0</version>
   <url>http://maven.apache.org</url>
   <build>
@@ -64,7 +64,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>Games.MainWindow</mainClass>
+                  <mainClass>games.MainWindow</mainClass>
                 </transformer>
               </transformers>
             </configuration>
