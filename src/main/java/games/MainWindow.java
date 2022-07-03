@@ -13,13 +13,13 @@ public class MainWindow extends JFrame {
 	private JButton exit;
 	private JPanel panel;
 	private ChangeGame cg;
-	
+
 	public static void main(String[] args) {
 		new MainWindow();
 	}
 
 	public MainWindow() {
-		setTitle("������� ����");
+		setTitle("Main Window");
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(150, 125);
 		setLocation(700, 200);
@@ -48,5 +48,6 @@ public class MainWindow extends JFrame {
 		panel.add(exit);
 		add(panel);
 		setVisible(true);
+
 	}
 }

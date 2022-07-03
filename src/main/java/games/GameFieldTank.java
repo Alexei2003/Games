@@ -226,7 +226,7 @@ public class GameFieldTank extends JPanel implements ActionListener {
 				massive[i][6] = 0;
 			}
 		}
-		if ((massive[i][2] - 32 == 0) && (massive[i][4] == 4) || (massive[i][3] - 32 == 0) && (massive[i][4] == 1)) {
+		if ((massive[i][2] - 32 == -32) && (massive[i][4] == 4) || (massive[i][3] - 32 ==-32) && (massive[i][4] == 1)) {
 			massive[i][6] = 0;
 		}
 	}

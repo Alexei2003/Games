@@ -16,7 +16,7 @@ public class ChangeGame extends JFrame {
 
 	public ChangeGame() {
 		setTitle("Change game");
-		setSize(300, 100);
+		setSize(600, 100);
 		setLocation(700, 400);
 		panel = new JPanel();
 		zmeika = new JButton("Zmeika");
